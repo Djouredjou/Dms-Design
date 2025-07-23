@@ -4,10 +4,12 @@ FROM php:8.2-apache
 # Activer mod_rewrite
 RUN a2enmod rewrite
 
-# Copier les fichiers PHP du dossier public vers le dossier d’hébergement Apache
-COPY public/ /var/www/html/
+# Installer l'extension PostgreSQL PDO
+RUN apt-get update && apt-get install -y libpq-dev \
+    && docker-php-ext-install pdo pdo_pgsql
 
-# Copier les fichiers nécessaires à la racine si besoin
+# Copier les fichiers dans /var/www/html
+COPY public/ /var/www/html/
 COPY config.php /var/www/html/
 
 # Définir les droits d’accès
