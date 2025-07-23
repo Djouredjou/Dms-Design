@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: mikrotik-admin
+    env: docker
+    plan: free
+    buildCommand: ""
+    startCommand: ./start.sh
+    envVars:
+      - key: DB_HOST
+        value: dpg-d1sdpmdfeiees73fg8g3g-a.oregon-postgres.render.com
+      - key: DB_NAME
+        value: mikrotik_tickets
+      - key: DB_USER
+        value: mikrotik_tickets_user
+      - key: DB_PASS
+        value: 4KPIHjGm36oGwgSlTVFhVC8vvveVMyGLj

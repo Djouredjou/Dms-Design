@@ -1,0 +1,18 @@
+{
+    "name": "dmsdesign/mikrotik_admin",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Dmsdesign\\MikrotikAdmin\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dms"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "evilfreelancer/routeros-api-php": "^1.5"
+    }
+}
