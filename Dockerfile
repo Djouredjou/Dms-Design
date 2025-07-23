@@ -1,18 +1,18 @@
 # Utiliser une image PHP avec Apache
 FROM php:8.2-apache
 
-# Activer mod_rewrite si besoin
+# Activer mod_rewrite
 RUN a2enmod rewrite
 
-# Copier les fichiers dans /var/www/html
+# Copier les fichiers PHP du dossier public vers le dossier d’hébergement Apache
 COPY public/ /var/www/html/
 
-# Copier les fichiers de configuration PHP (facultatif)
+# Copier les fichiers nécessaires à la racine si besoin
 COPY config.php /var/www/html/
 
-# Définir les droits
+# Définir les droits d’accès
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
-# Exposer le port
+# Exposer le port 80
 EXPOSE 80
