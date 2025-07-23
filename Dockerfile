@@ -1,25 +1,18 @@
-# 1. Utiliser l'image PHP officielle avec Apache
+# Utiliser une image PHP avec Apache
 FROM php:8.2-apache
 
-# 2. Activer mod_rewrite (utile pour .htaccess si nécessaire)
+# Activer mod_rewrite si besoin
 RUN a2enmod rewrite
 
-# 3. Copier les fichiers de ton projet dans le conteneur
-COPY . /var/www/html/
+# Copier les fichiers dans /var/www/html
+COPY public/ /var/www/html/
 
-# 4. Définir le répertoire racine comme dossier "public"
-WORKDIR /var/www/html/public
+# Copier les fichiers de configuration PHP (facultatif)
+COPY config.php /var/www/html/
 
-# 5. Donner les bons droits
-RUN chown -R www-data:www-data /var/www/html
+# Définir les droits
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
 
-# 6. Installer les extensions PHP nécessaires
-RUN docker-php-ext-install mysqli pdo pdo_mysql
-
-# 7. Installer Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-WORKDIR /var/www/html/
-RUN composer install || true  # en cas de vendor/ déjà présent
-
-# 8. Exposer le port utilisé par Apache
+# Exposer le port
 EXPOSE 80
