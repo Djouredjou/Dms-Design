@@ -10,12 +10,12 @@ date_default_timezone_set('Africa/Niamey');
 
 // Connexion à la base de données
 try {
-    $pdo = new PDO("pgsql:host=localhost;port=5432;dbname=mikrotik_tickets", "postgres", "4484");
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $_SESSION['debug_dashboard'][] = "Connexion à la base de données établie.";
+    $pdo = new PDO("pgsql:host=dpg-d1sdpmfdiees73fg8q3g-a.oregon-postgres.render.com;port=5432;dbname=mikrotik_tickets", "mikrotik_tickets_user", "4KPIHjGm30GwgSIIVFHVcBvwveVMyGLj", [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ]);
+    $_SESSION['debug_dashboard'][] = "Connexion à la base de données établie (Render).";
 } catch (PDOException $e) {
     $_SESSION['debug_dashboard'][] = "Erreur de connexion à la base de données: " . $e->getMessage();
-    // It's crucial to stop execution if DB connection fails, as no data can be retrieved.
     die("Impossible de se connecter à la base de données: " . $e->getMessage());
 }
 
